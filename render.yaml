@@ -6,7 +6,7 @@ services:
     region: singapore
     dockerfilePath: ./Dockerfile
     dockerContext: .
-    healthCheckPath: /health
+    healthCheckPath: /
     autoDeployTrigger: commit
     envVars:
       - key: APP_NAME
@@ -16,7 +16,7 @@ services:
       - key: APP_DEBUG
         value: "false"
       - key: APP_KEY
-        generateValue: true
+        sync: false
       - key: APP_LOCALE
         value: vi
       - key: LOG_CHANNEL
