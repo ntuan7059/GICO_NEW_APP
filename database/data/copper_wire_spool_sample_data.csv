@@ -1,0 +1,51 @@
+Product_ID,Wire_Gauge_AWG,Diameter_mm,Weight_kg,Length_m,Insulation_Type,Max_Temperature_C,Application,Price_USD,Stock_Quantity
+CU-SPOOL-1001,28,0.32,2.11,886,PVC Insulated,130,Motor Repair,27.09,36
+CU-SPOOL-1002,28,0.32,11.24,4720,Silicone Rubber,105,Automotive Circuits,163.33,17
+CU-SPOOL-1003,14,1.63,3.67,770,Silicone Rubber,200,Transformer Winding,56.4,149
+CU-SPOOL-1004,22,0.64,3.7,1221,Silicone Rubber,155,Transformer Winding,61.25,50
+CU-SPOOL-1005,28,0.32,6.63,2784,PVC Insulated,130,Motor Repair,117.64,96
+CU-SPOOL-1006,14,1.63,1.84,386,Bare (Uninsulated),200,DIY Electronics,31.44,77
+CU-SPOOL-1007,30,0.25,1.13,508,THHN,200,Transformer Winding,20.16,106
+CU-SPOOL-1008,14,1.63,8.5,1785,Silicone Rubber,155,Automotive Circuits,111.81,27
+CU-SPOOL-1009,14,1.63,10.09,2118,PVC Insulated,105,Motor Repair,173.54,107
+CU-SPOOL-1010,18,1.02,7.07,1908,PVC Insulated,130,DIY Electronics,99.91,78
+CU-SPOOL-1011,28,0.32,14.08,5913,Bare (Uninsulated),200,Automotive Circuits,222.6,146
+CU-SPOOL-1012,28,0.32,4.05,1701,THHN,180,DIY Electronics,72.65,66
+CU-SPOOL-1013,28,0.32,5.2,2184,Bare (Uninsulated),200,Motor Repair,88.04,90
+CU-SPOOL-1014,22,0.64,4.38,1445,Enamelled (Magnet Wire),200,DIY Electronics,58.15,137
+CU-SPOOL-1015,22,0.64,13.33,4398,THHN,130,DIY Electronics,171.13,147
+CU-SPOOL-1016,18,1.02,11.33,3059,THHN,200,Industrial Wiring,160.57,45
+CU-SPOOL-1017,24,0.51,7.66,2757,Bare (Uninsulated),200,Transformer Winding,98.94,50
+CU-SPOOL-1018,30,0.25,10.37,4666,Silicone Rubber,105,Industrial Wiring,148.18,129
+CU-SPOOL-1019,24,0.51,4.15,1494,Silicone Rubber,105,Transformer Winding,66.77,147
+CU-SPOOL-1020,30,0.25,4.37,1966,PVC Insulated,105,DIY Electronics,63.84,126
+CU-SPOOL-1021,14,1.63,14.33,3009,PVC Insulated,200,Motor Repair,215.61,37
+CU-SPOOL-1022,30,0.25,9.57,4306,Silicone Rubber,200,Motor Repair,123.62,51
+CU-SPOOL-1023,24,0.51,14.33,5158,Silicone Rubber,105,Automotive Circuits,199.83,14
+CU-SPOOL-1024,14,1.63,13.97,2933,PVC Insulated,130,Transformer Winding,187.83,30
+CU-SPOOL-1025,14,1.63,11.11,2333,Bare (Uninsulated),200,Automotive Circuits,184.37,42
+CU-SPOOL-1026,28,0.32,7.39,3103,Silicone Rubber,130,DIY Electronics,112.08,118
+CU-SPOOL-1027,16,1.29,13.97,3352,Enamelled (Magnet Wire),155,Industrial Wiring,251.05,105
+CU-SPOOL-1028,22,0.64,13.54,4468,THHN,105,Motor Repair,180.73,96
+CU-SPOOL-1029,14,1.63,9.03,1896,Enamelled (Magnet Wire),200,Motor Repair,108.75,25
+CU-SPOOL-1030,16,1.29,1.48,355,Bare (Uninsulated),200,DIY Electronics,18.39,70
+CU-SPOOL-1031,18,1.02,10.2,2754,Enamelled (Magnet Wire),200,Motor Repair,166.67,131
+CU-SPOOL-1032,16,1.29,11.88,2851,THHN,130,Transformer Winding,149.47,120
+CU-SPOOL-1033,18,1.02,6.64,1792,THHN,105,Transformer Winding,82.09,96
+CU-SPOOL-1034,30,0.25,12.99,5845,Enamelled (Magnet Wire),130,Motor Repair,197.68,45
+CU-SPOOL-1035,22,0.64,3.16,1042,THHN,130,Transformer Winding,46.32,150
+CU-SPOOL-1036,14,1.63,1.23,258,Silicone Rubber,105,Transformer Winding,21.6,70
+CU-SPOOL-1037,16,1.29,6.39,1533,THHN,130,Industrial Wiring,111.28,52
+CU-SPOOL-1038,22,0.64,0.53,174,THHN,155,Industrial Wiring,7.27,134
+CU-SPOOL-1039,16,1.29,3.25,780,Enamelled (Magnet Wire),105,Automotive Circuits,53.35,25
+CU-SPOOL-1040,28,0.32,5.05,2121,Bare (Uninsulated),200,Automotive Circuits,75.05,145
+CU-SPOOL-1041,16,1.29,1.32,316,Silicone Rubber,105,Motor Repair,16.38,27
+CU-SPOOL-1042,28,0.32,13.0,5460,THHN,105,Automotive Circuits,175.2,20
+CU-SPOOL-1043,24,0.51,1.69,608,Silicone Rubber,200,Automotive Circuits,23.49,76
+CU-SPOOL-1044,16,1.29,10.21,2450,PVC Insulated,130,DIY Electronics,146.77,86
+CU-SPOOL-1045,22,0.64,5.08,1676,Bare (Uninsulated),200,Transformer Winding,74.93,35
+CU-SPOOL-1046,14,1.63,8.3,1743,Silicone Rubber,155,Motor Repair,146.08,27
+CU-SPOOL-1047,16,1.29,5.86,1406,Enamelled (Magnet Wire),180,Automotive Circuits,95.06,145
+CU-SPOOL-1048,14,1.63,10.18,2137,Silicone Rubber,155,Transformer Winding,179.51,44
+CU-SPOOL-1049,18,1.02,2.17,585,Bare (Uninsulated),200,Automotive Circuits,28.06,82
+CU-SPOOL-1050,24,0.51,3.55,1278,PVC Insulated,130,DIY Electronics,53.37,74

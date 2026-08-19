@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: gia-hung-copper-store
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_NAME
+        value: Gia Hung JSC
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_LOCALE
+        value: vi
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: warning
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gia-hung-copper-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: MAIL_MAILER
+        value: log
+      - key: ADMIN_EMAIL
+        value: tuannm180220@gmail.com
+      - key: ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: gia-hung-copper-db
+    plan: free
+    region: singapore
+    databaseName: gia_hung_store
+    user: gia_hung_store
