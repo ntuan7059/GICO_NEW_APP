@@ -1,17 +1,32 @@
 @extends('themes.xylo.layouts.master')
 @section('title', 'Gia Hưng JSC | Dây đồng và cáp điện cho công trình Việt')
 @section('content')
-<section class="home-hero">
-    <img class="hero-media" src="{{ asset('banner.gif') }}" alt="Dây và cáp điện Gia Hưng">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <div class="hero-copy">
-            <span class="eyebrow">Kết nối bền vững · Dẫn truyền tin cậy</span>
-            <h1>Giải pháp dây đồng<br>cho mọi công trình Việt</h1>
-            <p>Tư vấn đúng quy cách, đầy đủ hồ sơ kỹ thuật và báo giá cạnh tranh cho nhà thầu, đại lý, nhà máy.</p>
-            <div class="hero-actions"><a href="{{ route('product.index') }}" class="btn-primary-copper">Khám phá sản phẩm <i class="fa-solid fa-arrow-right"></i></a><button class="btn-ghost js-open-inquiry">Nhận báo giá nhanh</button></div>
+<section class="home-banner-section">
+    <div class="container">
+        <div id="homeBannerCarousel" class="carousel slide home-banner-carousel" data-bs-ride="carousel" data-bs-interval="5500" data-bs-touch="true" aria-label="Sản phẩm và giải pháp Gia Hưng">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Banner dây đồng enamel"></button>
+                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="1" aria-label="Banner vật liệu kim loại công nghiệp"></button>
+                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="2" aria-label="Banner sản phẩm đồng"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active"><img src="{{ asset('gicobanner1.png') }}" class="d-block w-100" alt="Dây đồng enamel dạng cuộn của Gia Hưng"></div>
+                <div class="carousel-item"><img src="{{ asset('gicobanner2.jpg') }}" class="d-block w-100" alt="Vật liệu kim loại và thép kỹ thuật công nghiệp"></div>
+                <div class="carousel-item"><img src="{{ asset('gicobanner3.jpg') }}" class="d-block w-100" alt="Dây đồng, thanh đồng và vật liệu đồng công nghiệp"></div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#homeBannerCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Banner trước</span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#homeBannerCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Banner tiếp theo</span></button>
         </div>
-        <div class="hero-proof"><span><strong>15+</strong>Năm kinh nghiệm</span><span><strong>63</strong>Tỉnh thành phục vụ</span><span><strong>CO/CQ</strong>Hồ sơ minh bạch</span></div>
+
+        <div class="home-hero-panel">
+            <div class="hero-copy">
+                <span class="eyebrow">Kết nối bền vững · Dẫn truyền tin cậy</span>
+                <h1>Giải pháp dây đồng cho mọi công trình Việt</h1>
+                <p>Tư vấn đúng quy cách, đầy đủ hồ sơ kỹ thuật và báo giá cạnh tranh cho nhà thầu, đại lý, nhà máy.</p>
+                <div class="hero-actions"><a href="{{ route('product.index') }}" class="btn-primary-copper">Khám phá sản phẩm <i class="fa-solid fa-arrow-right"></i></a><button class="btn-ghost js-open-inquiry">Nhận báo giá nhanh</button></div>
+            </div>
+            <div class="hero-proof"><span><strong>18+</strong>Năm kinh nghiệm</span><span><strong>63</strong>Tỉnh thành phục vụ</span><span><strong>CO/CQ</strong>Hồ sơ minh bạch</span></div>
+        </div>
     </div>
 </section>
 
