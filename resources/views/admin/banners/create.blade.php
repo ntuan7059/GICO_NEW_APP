@@ -87,6 +87,9 @@
                                    class="form-control d-none @error('languages.' . $language->code . '.image') is-invalid @enderror"
                                    onchange="previewImage(this, '{{ $language->code }}')">
                         </div>
+                        <div class="form-text text-warning mt-1">
+                            <i class="fas fa-circle-info me-1"></i>Dung lượng ảnh phải nhỏ hơn 300 KB.
+                        </div>
 
                         {{-- Hidden base64 (keeps preview after validation) --}}
                         <input type="hidden" id="image_base64_{{ $language->code }}" 

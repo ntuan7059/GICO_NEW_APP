@@ -37,9 +37,9 @@ class BannerService
             $rules["languages.$code.title"] = 'required|string|max:255';
 
             if ($code === $defaultLang) {
-                $rules["languages.$code.image"] = 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000';
+                $rules["languages.$code.image"] = 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:300';
             } else {
-                $rules["languages.$code.image"] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000';
+                $rules["languages.$code.image"] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:300';
             }
 
             $rules["languages.$code.description"] = 'nullable|string|max:2000';
@@ -81,7 +81,7 @@ class BannerService
     {
         $request->validate([
             'languages.*.title' => 'required|string|max:255',
-            'languages.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
+            'languages.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:300',
             'type' => 'required|in:promotion,sale,seasonal,featured,announcement',
             'sort_order' => 'required|integer|min:0|max:65535',
             'link_url' => 'nullable|string|max:500',

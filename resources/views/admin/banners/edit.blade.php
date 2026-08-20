@@ -105,6 +105,10 @@
                                         </span>
                                     </div>
 
+                                    <div class="form-text text-warning mt-1">
+                                        <i class="fas fa-circle-info me-1"></i>Dung lượng ảnh phải nhỏ hơn 300 KB.
+                                    </div>
+
                                     @error('languages.' . $index . '.image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
