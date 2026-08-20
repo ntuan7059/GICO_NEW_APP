@@ -21,7 +21,8 @@ class CopperCatalogTest extends TestCase
         $this->assertSame(50, (clone $samples)->whereHas('primaryVariant')->count());
         $this->assertSame(50, (clone $samples)->whereHas('images', fn ($query) => $query->where('image_url', 'like', 'http%'))->count());
 
-        $this->get(route('product.index', ['q' => 'CU-SPOOL-1001']))
+        $this->withSession(['locale' => 'vi'])
+            ->get(route('product.index', ['q' => 'CU-SPOOL-1001']))
             ->assertOk()
             ->assertSee('CU-SPOOL-1001')
             ->assertSee('Chat mua hàng')

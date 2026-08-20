@@ -29,10 +29,7 @@
         return $canonicalBase.($query ? '?'.http_build_query($query) : '');
     };
     $organizationId = route('xylo.home').'#organization';
-    $globalSchema = [
-        '@context' => 'https://schema.org',
-        '@graph' => [
-            [
+    $organizationSchema = [
                 '@type' => 'Organization',
                 '@id' => $organizationId,
                 'name' => 'Công ty Cổ phần Gia Hưng',
@@ -57,8 +54,8 @@
                     'availableLanguage' => ['Vietnamese', 'English'],
                     'areaServed' => 'VN',
                 ]],
-            ],
-            [
+            ];
+    $websiteSchema = [
                 '@type' => 'WebSite',
                 '@id' => route('xylo.home').'#website',
                 'url' => route('xylo.home'),
@@ -70,9 +67,11 @@
                     'target' => route('product.index').'?q={search_term_string}',
                     'query-input' => 'required name=search_term_string',
                 ],
-            ],
-        ],
-    ];
+            ];
+    $globalGraph = request()->routeIs('xylo.home')
+        ? [$organizationSchema, $websiteSchema]
+        : (request()->routeIs('about') ? [$organizationSchema] : []);
+    $globalSchema = $globalGraph ? ['@context' => 'https://schema.org', '@graph' => $globalGraph] : null;
 @endphp
 <!doctype html>
 <html lang="{{ $seoLocale }}">
@@ -112,7 +111,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap&subset=vietnamese" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <script type="application/ld+json">@json($globalSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
+    @if($globalSchema)<script type="application/ld+json">@json($globalSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>@endif
     @stack('structured_data')
     @if (!App::environment('testing'))
         @vite(['resources/views/themes/xylo/css/custom.css', 'resources/views/themes/xylo/css/refinements.css'])

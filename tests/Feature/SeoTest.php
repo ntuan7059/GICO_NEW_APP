@@ -42,7 +42,7 @@ class SeoTest extends TestCase
             ->assertOk()
             ->assertSee('"@type":"Product"', false)
             ->assertSee('"sku":', false)
-            ->assertSee('"offers":', false);
+            ->assertDontSee('"offers":', false);
     }
 
     public function test_sitemap_and_robots_are_crawlable(): void

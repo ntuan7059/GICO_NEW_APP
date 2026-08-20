@@ -21,6 +21,8 @@ class LocaleMiddleware
             session(['locale' => $request->query('lang')]);
         } elseif (session()->has('locale')) {
             App::setLocale(session('locale'));
+        } else {
+            App::setLocale(config('app.locale', 'vi'));
         }
 
         return $next($request);

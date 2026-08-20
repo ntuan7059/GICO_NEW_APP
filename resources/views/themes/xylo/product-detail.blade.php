@@ -16,15 +16,7 @@
         'description' => $seoDescription,
         'sku' => optional($product->primaryVariant)->SKU,
         'category' => optional(optional($product->category)->translation)->name,
-        'offers' => [
-            '@type' => 'Offer',
-            'url' => route('product.show', $product->slug),
-            'priceCurrency' => $product->currency ?: 'USD',
-            'price' => optional($product->primaryVariant)->price,
-            'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-            'itemCondition' => 'https://schema.org/NewCondition',
-            'seller' => ['@id' => route('xylo.home').'#organization'],
-        ],
+        'seller' => ['@type' => 'Organization', 'name' => 'Công ty Cổ phần Gia Hưng', 'url' => route('xylo.home')],
     ];
     if ($product->reviews_count > 0 && $product->reviews_avg_rating) {
         $productSchema['aggregateRating'] = [
