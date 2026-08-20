@@ -12,7 +12,7 @@ class BannerRepository implements BannerRepositoryInterface
     // Get all banners with translations
     public function getAllBanners(): Collection
     {
-        return Banner::with('translations')->orderBy('created_at', 'desc')->get();
+        return Banner::with('translations')->orderBy('sort_order')->orderByDesc('created_at')->get();
     }
 
     // Get a banner by its ID
@@ -26,6 +26,8 @@ class BannerRepository implements BannerRepositoryInterface
     {
         return Banner::create([
             'type' => $data['type'],
+            'sort_order' => $data['sort_order'] ?? 0,
+            'link_url' => $data['link_url'] ?? null,
         ]);
     }
 
@@ -33,6 +35,8 @@ class BannerRepository implements BannerRepositoryInterface
     public function updateBanner(Banner $banner, array $data): Banner
     {
         $banner->type = $data['type'];
+        $banner->sort_order = $data['sort_order'] ?? 0;
+        $banner->link_url = $data['link_url'] ?? null;
         $banner->save();
 
         return $banner;
@@ -44,8 +48,8 @@ class BannerRepository implements BannerRepositoryInterface
         // Delete associated images if they exist
         $translations = BannerTranslation::where('banner_id', $banner->id)->get();
         foreach ($translations as $translation) {
-            if ($translation->image_url && Storage::exists($translation->image_url)) {
-                Storage::delete($translation->image_url);
+            if ($translation->image_url && Storage::disk('public')->exists($translation->image_url)) {
+                Storage::disk('public')->delete($translation->image_url);
             }
         }
 

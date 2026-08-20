@@ -23,6 +23,7 @@ Route::get('/', [StoreController::class, 'index'])->name('xylo.home');
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/document', [DocumentController::class, 'index'])->name('document.index');
+Route::get('/document/{document}/download', [DocumentController::class, 'download'])->name('document.download');
 Route::post('/change-currency', [CurrencyController::class, 'changeCurrency'])->name('change.currency');
 
 Route::post('/change-store-language', [LanguageController::class, 'changeLanguage'])->name('change.store.language');

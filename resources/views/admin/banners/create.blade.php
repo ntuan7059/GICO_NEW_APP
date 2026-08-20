@@ -25,6 +25,17 @@
                 @error('type') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <label class="form-label" for="sort_order">Thứ tự hiển thị</label>
+                    <input class="form-control" id="sort_order" name="sort_order" type="number" min="0" max="65535" value="{{ old('sort_order', 0) }}" required>
+                </div>
+                <div class="col-md-9">
+                    <label class="form-label" for="link_url">Liên kết khi nhấp (không bắt buộc)</label>
+                    <input class="form-control" id="link_url" name="link_url" value="{{ old('link_url') }}" maxlength="500" placeholder="/product hoặc https://example.com">
+                </div>
+            </div>
+
             {{-- Language tabs --}}
             <ul class="nav nav-tabs mt-4" role="tablist">
                 @foreach($languages as $language)

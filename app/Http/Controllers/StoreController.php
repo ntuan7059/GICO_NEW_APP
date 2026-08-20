@@ -13,9 +13,9 @@ class StoreController extends Controller
         $locale = app()->getLocale();
 
         $banners = Banner::where('status', 1)
-            ->with('translation')
-            ->orderBy('id', 'desc')
-            ->take(3)
+            ->with('translations')
+            ->orderBy('sort_order')
+            ->orderByDesc('id')
             ->get();
 
         $categories = Category::where('status', 1)

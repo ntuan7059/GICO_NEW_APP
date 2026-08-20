@@ -25,6 +25,6 @@ class CopperCatalogTest extends TestCase
             ->assertOk()
             ->assertSee('CU-SPOOL-1001')
             ->assertSee('Chat mua hàng')
-            ->assertSee('tuannm180220@gmail.com');
+            ->assertSee('gicovn186@gmail.com');
     }
 }

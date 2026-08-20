@@ -22,7 +22,7 @@ class SiteSettingsSeeder extends Seeder
             'meta_keywords' => 'dây đồng, cáp điện, cáp điện lực, dây tiếp địa, báo giá cáp điện',
             'logo' => 'favicon.png',
             'favicon' => 'favicon.png',
-            'contact_email' => 'tuannm180220@gmail.com',
+            'contact_email' => 'gicovn186@gmail.com',
             'contact_phone' => '0906 23 6863',
             'address' => '186 Nguyễn Tuân, Thanh Xuân, Hà Nội',
             'footer_text' => '© Công ty Cổ phần Gia Hưng. Mọi quyền được bảo lưu.',

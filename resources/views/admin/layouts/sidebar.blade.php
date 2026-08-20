@@ -15,6 +15,11 @@
                 <i class="fas fa-comments me-2"></i> <span>Yêu cầu báo giá</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.documents.*') ? 'active' : '' }}" href="{{ route('admin.documents.index') }}">
+                <i class="fas fa-file-arrow-up me-2"></i> <span>Tài liệu kỹ thuật</span>
+            </a>
+        </li>
          <li class="nav-item">
             <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#productMenu" role="button" aria-expanded="false" aria-controls="productMenu">
                 <span><i class="fas fa-box me-2"></i> <span>{{ __('cms.sidebar.products.title') }}</span></span>

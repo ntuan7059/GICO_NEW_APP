@@ -17,6 +17,7 @@
                         <tr>
                             <th>{{ __('cms.banners.id') }}</th>
                             <th>{{ __('cms.banners.banner_type') }}</th>
+                            <th>Thứ tự</th>
                             <th>{{ __('cms.banners.image') }}</th>
                             <th>{{ __('cms.banners.status') }}</th> 
                             <th>{{ __('cms.banners.actions') }}</th>
@@ -78,6 +79,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'type', name: 'type' },
+                { data: 'sort_order', name: 'sort_order' },
                 { data: 'image', name: 'image', orderable: false, searchable: false },
                 { 
                     data: 'status', 
@@ -194,5 +196,4 @@
 
     </script>
 @endsection
-
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
@@ -151,6 +152,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/inquiries/{inquiry}', [App\Http\Controllers\Admin\InquiryController::class, 'show'])->name('inquiries.show');
     Route::post('/inquiries/{inquiry}/reply', [App\Http\Controllers\Admin\InquiryController::class, 'reply'])->name('inquiries.reply');
     Route::patch('/inquiries/{inquiry}/status', [App\Http\Controllers\Admin\InquiryController::class, 'status'])->name('inquiries.status');
+
+    /* Technical documents */
+    Route::get('documents/{document}/download', [AdminDocumentController::class, 'download'])->name('documents.download');
+    Route::resource('documents', AdminDocumentController::class)->except('show');
 });
 
 Route::get('site-settings', [SiteSettingsController::class, 'index'])->name('site-settings.index');

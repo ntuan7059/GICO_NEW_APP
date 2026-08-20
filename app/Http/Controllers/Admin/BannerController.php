@@ -38,11 +38,14 @@ class BannerController extends Controller
 
     public function getData(Request $request)
     {
-        $banners = Banner::with('translations')->get();
+        $banners = Banner::with('translations')->orderBy('sort_order')->orderByDesc('id')->get();
 
         return DataTables::of($banners)
             ->addColumn('image', function ($banner) {
-                $imageUrl = $banner->translations->firstWhere('language_code', 'en')->image_url ?? null;
+                $imageUrl = optional($banner->translations->firstWhere('language_code', app()->getLocale())
+                    ?? $banner->translations->firstWhere('language_code', 'vi')
+                    ?? $banner->translations->firstWhere('language_code', 'en')
+                    ?? $banner->translations->first())->image_url;
 
                 return $imageUrl ? '<img src="'.Storage::url($imageUrl).'" width="50" />' : 'No Image';
             })

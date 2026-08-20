@@ -12,7 +12,7 @@
             <button type="submit">Gửi yêu cầu <i class="fa-solid fa-arrow-right"></i></button>
         </form>
         <form id="inquiryReplyForm" class="inquiry-reply" hidden><input name="message" required placeholder="Nhập tin nhắn..."><button aria-label="Gửi"><i class="fa-solid fa-paper-plane"></i></button></form>
-        <div class="inquiry-email"><a href="mailto:tuannm180220@gmail.com?subject=Yêu%20cầu%20tư%20vấn%20dây%20đồng"><i class="fa-regular fa-envelope"></i> Hoặc gửi email trực tiếp đến bộ phận bán hàng</a></div>
+        <div class="inquiry-email"><a href="mailto:gicovn186@gmail.com?subject=Yêu%20cầu%20tư%20vấn%20dây%20đồng"><i class="fa-regular fa-envelope"></i> Hoặc gửi email trực tiếp đến bộ phận bán hàng</a></div>
     </section>
 </div>
 <script>

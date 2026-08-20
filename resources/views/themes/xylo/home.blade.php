@@ -3,19 +3,52 @@
 @section('content')
 <section class="home-banner-section">
     <div class="container">
+        @php
+            $fallbackBanners = [
+                ['image' => asset('gicobanner1.png'), 'title' => 'Dây đồng chất lượng cho sản xuất', 'description' => 'Nguồn vật tư ổn định, tư vấn đúng quy cách.'],
+                ['image' => asset('gicobanner2.jpg'), 'title' => 'Vật liệu kim loại công nghiệp', 'description' => 'Giải pháp phù hợp cho nhà máy và công trình.'],
+                ['image' => asset('gicobanner3.jpg'), 'title' => 'Đồng công nghiệp đa dạng quy cách', 'description' => 'Hồ sơ minh bạch, giao hàng trên toàn quốc.'],
+            ];
+            $slides = $banners->map(function ($banner) {
+                $translation = $banner->translations->firstWhere('language_code', app()->getLocale())
+                    ?? $banner->translations->firstWhere('language_code', 'vi')
+                    ?? $banner->translations->firstWhere('language_code', 'en')
+                    ?? $banner->translations->first();
+                if (! $translation || ! $translation->image_url) {
+                    return null;
+                }
+                $image = \Illuminate\Support\Str::startsWith($translation->image_url, ['http://', 'https://'])
+                    ? $translation->image_url
+                    : \Illuminate\Support\Facades\Storage::disk('public')->url($translation->image_url);
+                $link = \Illuminate\Support\Str::startsWith((string) $banner->link_url, ['/', 'http://', 'https://']) ? $banner->link_url : null;
+
+                return ['image' => $image, 'title' => $translation->title, 'description' => strip_tags($translation->description ?? ''), 'link' => $link];
+            })->filter()->values();
+            if ($slides->isEmpty()) {
+                $slides = collect($fallbackBanners);
+            }
+        @endphp
         <div id="homeBannerCarousel" class="carousel slide home-banner-carousel" data-bs-ride="carousel" data-bs-interval="5500" data-bs-touch="true" aria-label="Sản phẩm và giải pháp Gia Hưng">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Banner dây đồng enamel"></button>
-                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="1" aria-label="Banner vật liệu kim loại công nghiệp"></button>
-                <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="2" aria-label="Banner sản phẩm đồng"></button>
+                @foreach ($slides as $slide)
+                    <button type="button" data-bs-target="#homeBannerCarousel" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}" @if($loop->first) aria-current="true" @endif aria-label="Banner {{ $loop->iteration }}"></button>
+                @endforeach
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active"><img src="{{ asset('gicobanner1.png') }}" class="d-block w-100" alt="Dây đồng enamel dạng cuộn của Gia Hưng"></div>
-                <div class="carousel-item"><img src="{{ asset('gicobanner2.jpg') }}" class="d-block w-100" alt="Vật liệu kim loại và thép kỹ thuật công nghiệp"></div>
-                <div class="carousel-item"><img src="{{ asset('gicobanner3.jpg') }}" class="d-block w-100" alt="Dây đồng, thanh đồng và vật liệu đồng công nghiệp"></div>
+                @foreach ($slides as $slide)
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        @if (! empty($slide['link']))<a class="banner-slide-link" href="{{ $slide['link'] }}">@endif
+                        <img src="{{ $slide['image'] }}" class="d-block w-100" alt="{{ $slide['title'] }}">
+                        <div class="banner-slide-shade"></div>
+                        <div class="banner-slide-caption"><span>Gia Hưng JSC</span><h2>{{ $slide['title'] }}</h2>@if($slide['description'])<p>{{ $slide['description'] }}</p>@endif</div>
+                        @if (! empty($slide['link']))</a>@endif
+                    </div>
+                @endforeach
             </div>
+            @if ($slides->count() > 1)
             <button class="carousel-control-prev" type="button" data-bs-target="#homeBannerCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Banner trước</span></button>
             <button class="carousel-control-next" type="button" data-bs-target="#homeBannerCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Banner tiếp theo</span></button>
+            @endif
         </div>
 
         <div class="home-hero-panel">
@@ -57,7 +90,7 @@
         @endphp
         <article class="product-card-new">
             <a class="product-card-image" href="{{ route('product.show', $product->slug) }}"><img loading="lazy" src="{{ $imageUrl }}" onerror="this.onerror=null;this.src='{{ asset('favicon.png') }}'" alt="{{ $translation->name ?? 'Dây cáp điện' }}"><span>Gia Hưng chọn lọc</span></a>
-            <div class="product-card-body"><small>{{ optional(optional($product->category)->translation)->name ?? 'Dây & cáp điện' }}</small><h3><a href="{{ route('product.show', $product->slug) }}">{{ $translation->name ?? 'Dây cáp điện chất lượng cao' }}</a></h3><p>{!! \Illuminate\Support\Str::limit(strip_tags($translation->short_description ?? $translation->description ?? ''), 100) !!}</p><div class="product-card-meta"><span>Giá theo quy cách & số lượng</span><a href="{{ route('product.show', $product->slug) }}" aria-label="Xem chi tiết"><i class="fa-solid fa-arrow-right"></i></a></div><div class="product-card-actions"><button type="button" class="js-open-inquiry" data-product-id="{{ $product->id }}" data-product-name="{{ $translation->name ?? $product->slug }}"><i class="fa-regular fa-comments"></i> Chat mua hàng</button><a href="mailto:tuannm180220@gmail.com?subject={{ rawurlencode('Yêu cầu báo giá: '.($translation->name ?? $product->slug)) }}" aria-label="Gửi email mua hàng"><i class="fa-regular fa-envelope"></i></a></div></div>
+            <div class="product-card-body"><small>{{ optional(optional($product->category)->translation)->name ?? 'Dây & cáp điện' }}</small><h3><a href="{{ route('product.show', $product->slug) }}">{{ $translation->name ?? 'Dây cáp điện chất lượng cao' }}</a></h3><p>{!! \Illuminate\Support\Str::limit(strip_tags($translation->short_description ?? $translation->description ?? ''), 100) !!}</p><div class="product-card-meta"><span>Giá theo quy cách & số lượng</span><a href="{{ route('product.show', $product->slug) }}" aria-label="Xem chi tiết"><i class="fa-solid fa-arrow-right"></i></a></div><div class="product-card-actions"><button type="button" class="js-open-inquiry" data-product-id="{{ $product->id }}" data-product-name="{{ $translation->name ?? $product->slug }}"><i class="fa-regular fa-comments"></i> Chat mua hàng</button><a href="mailto:gicovn186@gmail.com?subject={{ rawurlencode('Yêu cầu báo giá: '.($translation->name ?? $product->slug)) }}" aria-label="Gửi email mua hàng"><i class="fa-regular fa-envelope"></i></a></div></div>
         </article>
     @empty
         <div class="empty-state">Danh mục sản phẩm đang được cập nhật. Vui lòng liên hệ để nhận tư vấn.</div>

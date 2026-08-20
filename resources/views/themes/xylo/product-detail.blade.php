@@ -23,7 +23,7 @@
         @if($groupedAttributes->isNotEmpty())<div class="spec-options">
             @foreach($groupedAttributes as $values)<div><strong>{{ optional($values->first()->attribute)->name }}</strong><div>@foreach($values as $value)<span>{{ $value->translations->firstWhere('language_code','vi')->translated_value ?? $value->value }}</span>@endforeach</div></div>@endforeach
         </div>@endif
-        <div class="detail-actions"><button class="btn-primary-copper js-open-inquiry" data-product-id="{{ $product->id }}" data-product-name="{{ $productName }}"><i class="fa-regular fa-comments"></i> Chat nhận báo giá</button><a class="btn-outline-copper" href="mailto:tuannm180220@gmail.com?subject={{ rawurlencode('Yêu cầu báo giá: '.$productName) }}&body={{ rawurlencode('Xin chào bộ phận bán hàng, tôi muốn nhận báo giá cho '.$productName.'.') }}"><i class="fa-regular fa-envelope"></i> Gửi email</a></div>
+        <div class="detail-actions"><button class="btn-primary-copper js-open-inquiry" data-product-id="{{ $product->id }}" data-product-name="{{ $productName }}"><i class="fa-regular fa-comments"></i> Chat nhận báo giá</button><a class="btn-outline-copper" href="mailto:gicovn186@gmail.com?subject={{ rawurlencode('Yêu cầu báo giá: '.$productName) }}&body={{ rawurlencode('Xin chào bộ phận bán hàng, tôi muốn nhận báo giá cho '.$productName.'.') }}"><i class="fa-regular fa-envelope"></i> Gửi email</a></div>
         <div class="detail-contact"><span><i class="fa-solid fa-phone"></i><small>Tư vấn trực tiếp</small><a href="tel:0906236863">0906 23 6863</a></span><span><i class="fa-solid fa-truck-fast"></i><small>Phạm vi giao hàng</small><strong>Toàn quốc</strong></span></div>
     </div>
 </div></section>

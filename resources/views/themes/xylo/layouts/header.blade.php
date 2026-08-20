@@ -4,7 +4,7 @@
             <span>Đồng hành cùng nhà thầu, đại lý và nhà máy trên toàn quốc</span>
             <div class="d-flex flex-wrap gap-3">
                 <a href="tel:0906236863"><i class="fa-solid fa-phone"></i> 0906 23 6863</a>
-                <a href="mailto:tuannm180220@gmail.com"><i class="fa-regular fa-envelope"></i> tuannm180220@gmail.com</a>
+                <a href="mailto:gicovn186@gmail.com"><i class="fa-regular fa-envelope"></i> gicovn186@gmail.com</a>
             </div>
         </div>
     </div>

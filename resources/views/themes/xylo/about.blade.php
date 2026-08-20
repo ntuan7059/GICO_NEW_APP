@@ -85,7 +85,7 @@
             <div class="about-contact-list">
                 <span><i class="fa-solid fa-location-dot"></i>186 Nguyễn Tuân, Thanh Xuân, Hà Nội</span>
                 <a href="tel:0906236863"><i class="fa-solid fa-phone"></i>0906 23 6863</a>
-                <a href="mailto:tuannm180220@gmail.com"><i class="fa-regular fa-envelope"></i>tuannm180220@gmail.com</a>
+                <a href="mailto:gicovn186@gmail.com"><i class="fa-regular fa-envelope"></i>gicovn186@gmail.com</a>
             </div>
             <button type="button" class="btn-primary-copper js-open-inquiry">Chat nhận tư vấn <i class="fa-regular fa-comments"></i></button>
         </aside>

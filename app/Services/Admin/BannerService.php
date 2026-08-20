@@ -29,6 +29,8 @@ class BannerService
 
         $rules = [
             'type' => 'required|in:promotion,sale,seasonal,featured,announcement',
+            'sort_order' => 'required|integer|min:0|max:65535',
+            'link_url' => 'nullable|string|max:500',
         ];
 
         foreach ($activeLanguages as $code) {
@@ -40,14 +42,14 @@ class BannerService
                 $rules["languages.$code.image"] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000';
             }
 
-            $rules["languages.$code.description"] = 'required|string|min:3';
+            $rules["languages.$code.description"] = 'nullable|string|max:2000';
 
             $rules["languages.$code.image_title"] = 'nullable|string|max:255';
         }
 
         $validated = $request->validate($rules);
 
-        $banner = $this->bannerRepository->createBanner($request->only('type'));
+        $banner = $this->bannerRepository->createBanner($request->only('type', 'sort_order', 'link_url'));
 
         $defaultImage = null;
         if ($request->hasFile("languages.$defaultLang.image")) {
@@ -58,15 +60,15 @@ class BannerService
             $langInput = $request->input("languages.$code");
 
             $image = $request->file("languages.$code.image");
-            $imageUrl = $image
-                ? $image->store('banner_images', 'public')
-                : $defaultImage;
+            $imageUrl = $code === $defaultLang
+                ? $defaultImage
+                : ($image ? $image->store('banner_images', 'public') : $defaultImage);
 
             BannerTranslation::create([
                 'banner_id' => $banner->id,
                 'language_code' => $code,
                 'title' => $langInput['title'],
-                'description' => $langInput['description'],
+                'description' => $langInput['description'] ?? null,
                 'image_title' => $langInput['image_title'] ?? null,
                 'image_url' => $imageUrl,
             ]);
@@ -79,26 +81,32 @@ class BannerService
     {
         $request->validate([
             'languages.*.title' => 'required|string|max:255',
-            'languages.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'languages.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10000',
             'type' => 'required|in:promotion,sale,seasonal,featured,announcement',
+            'sort_order' => 'required|integer|min:0|max:65535',
+            'link_url' => 'nullable|string|max:500',
         ]);
 
         $banner = $this->bannerRepository->getBannerById($id);
 
-        $this->bannerRepository->updateBanner($banner, $request->only('type'));
+        $this->bannerRepository->updateBanner($banner, $request->only('type', 'sort_order', 'link_url'));
 
-        foreach ($request->languages as $languageData) {
+        foreach ($request->input('languages', []) as $index => $languageData) {
             $translation = BannerTranslation::where('banner_id', $banner->id)
                 ->where('language_code', $languageData['language_code'])
                 ->first();
+            $uploadedImage = $request->file("languages.$index.image");
 
             if ($translation) {
                 $imageUrl = null;
-                if (isset($languageData['image']) && $languageData['image']) {
-                    if ($translation->image_url && Storage::exists($translation->image_url)) {
-                        Storage::delete($translation->image_url);
+                if ($uploadedImage) {
+                    $imageIsShared = BannerTranslation::where('image_url', $translation->image_url)
+                        ->whereKeyNot($translation->id)
+                        ->exists();
+                    if ($translation->image_url && ! $imageIsShared && Storage::disk('public')->exists($translation->image_url)) {
+                        Storage::disk('public')->delete($translation->image_url);
                     }
-                    $imageUrl = $languageData['image']->store('public/banner_images');
+                    $imageUrl = $uploadedImage->store('banner_images', 'public');
                 }
 
                 $translation->title = $languageData['title'];
@@ -107,8 +115,8 @@ class BannerService
                 $translation->save();
             } else {
                 $imageUrl = null;
-                if (isset($languageData['image']) && $languageData['image']) {
-                    $imageUrl = $languageData['image']->store('public/banner_images');
+                if ($uploadedImage) {
+                    $imageUrl = $uploadedImage->store('banner_images', 'public');
                 }
 
                 BannerTranslation::create([
