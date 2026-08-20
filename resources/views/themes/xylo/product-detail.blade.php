@@ -1,13 +1,46 @@
 @extends('themes.xylo.layouts.master')
 @php
-    $translation = $product->translations->firstWhere('language_code','vi') ?? $product->translations->firstWhere('language_code','en') ?? $product->translations->first();
+    $translation = $product->translations->firstWhere('language_code', app()->getLocale()) ?? $product->translations->firstWhere('language_code','vi') ?? $product->translations->firstWhere('language_code','en') ?? $product->translations->first();
     $productName = $translation->name ?? $product->slug;
     $mainImage = optional($product->images->firstWhere('type','thumb') ?? $product->images->first())->image_url;
     $mainImageUrl = $mainImage ? (\Illuminate\Support\Str::startsWith($mainImage, ['http://','https://']) ? $mainImage : Storage::url($mainImage)) : asset('favicon.png');
     $groupedAttributes = $product->attributeValues->groupBy('attribute_id');
+    $seoDescription = \Illuminate\Support\Str::limit(strip_tags($translation->short_description ?? $translation->description ?? ''), 155);
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        '@id' => route('product.show', $product->slug).'#product',
+        'name' => $productName,
+        'url' => route('product.show', $product->slug).(app()->getLocale() === 'en' ? '?lang=en' : ''),
+        'image' => [$mainImageUrl],
+        'description' => $seoDescription,
+        'sku' => optional($product->primaryVariant)->SKU,
+        'category' => optional(optional($product->category)->translation)->name,
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => route('product.show', $product->slug),
+            'priceCurrency' => $product->currency ?: 'USD',
+            'price' => optional($product->primaryVariant)->price,
+            'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'seller' => ['@id' => route('xylo.home').'#organization'],
+        ],
+    ];
+    if ($product->reviews_count > 0 && $product->reviews_avg_rating) {
+        $productSchema['aggregateRating'] = [
+            '@type' => 'AggregateRating',
+            'ratingValue' => round($product->reviews_avg_rating, 1),
+            'reviewCount' => $product->reviews_count,
+        ];
+    }
 @endphp
-@section('title', $productName . ' | Gia Hưng JSC')
-@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($translation->short_description ?? $translation->description ?? ''), 155))
+@section('title', $productName . ' | ' . (app()->getLocale() === 'en' ? 'Gia Hung JSC' : 'Gia Hưng JSC'))
+@section('meta_description', $seoDescription)
+@section('seo_image', $mainImageUrl)
+@section('seo_type', 'product')
+@push('structured_data')
+<script type="application/ld+json">@json($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
+@endpush
 @section('content')
 <div class="breadcrumb-bar"><div class="container"><a href="{{ route('xylo.home') }}">Trang chủ</a><i class="fa-solid fa-chevron-right"></i><a href="{{ route('product.index') }}">Sản phẩm</a><i class="fa-solid fa-chevron-right"></i><span>{{ $productName }}</span></div></div>
 <section class="detail-section"><div class="container detail-layout">

@@ -1,6 +1,7 @@
 @extends('themes.xylo.layouts.master')
 
-@section('title', $category->translation->name)
+@section('title', ($category->translation->name ?? $category->slug).' | '.(app()->getLocale() === 'en' ? 'Gia Hung JSC' : 'Gia Hưng JSC'))
+@section('meta_description', app()->getLocale() === 'en' ? 'Browse '.($category->translation->name ?? $category->slug).' products, specifications and technical support from Gia Hung JSC.' : 'Xem sản phẩm '.($category->translation->name ?? $category->slug).', quy cách kỹ thuật và nhận tư vấn báo giá từ Gia Hưng.')
 
 @section('content')
 <div class="container py-4">

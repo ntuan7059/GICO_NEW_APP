@@ -1,6 +1,7 @@
 @extends('themes.xylo.layouts.master')
 
-@section('title', 'Tài liệu kỹ thuật | Gia Hưng JSC')
+@section('title', app()->getLocale() === 'en' ? 'Copper Wire Technical Documents | Gia Hung JSC' : 'Tài liệu kỹ thuật dây đồng | Gia Hưng JSC')
+@section('meta_description', app()->getLocale() === 'en' ? 'Download copper wire catalogues, technical specifications and product documentation from Gia Hung JSC.' : 'Tải catalogue dây đồng, thông số kỹ thuật và hồ sơ sản phẩm chính thức từ Công ty Cổ phần Gia Hưng.')
 
 @section('content')
 <section class="document-hero">

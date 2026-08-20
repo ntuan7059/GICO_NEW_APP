@@ -1,7 +1,7 @@
 @extends('themes.xylo.layouts.master')
 
-@section('title', 'Về Gia Hưng | Gần 20 năm đồng hành cùng ngành điện Việt Nam')
-@section('meta_description', 'Công ty Cổ phần Gia Hưng cung ứng dây đồng, vật liệu cách điện và giải pháp kỹ thuật cho nhà thầu, đại lý và nhà máy trên toàn quốc.')
+@section('title', app()->getLocale() === 'en' ? 'About Gia Hung JSC | Copper Wire Supplier Since 2006' : 'Về Gia Hưng | Nhà cung cấp dây đồng từ năm 2006')
+@section('meta_description', app()->getLocale() === 'en' ? 'Gia Hung JSC has supplied copper wire, electrical insulation materials and technical solutions to factories and distributors since 2006.' : 'Công ty Cổ phần Gia Hưng cung ứng dây đồng, vật liệu cách điện và giải pháp kỹ thuật cho nhà thầu, đại lý và nhà máy từ năm 2006.')
 
 @section('content')
 <section class="about-intro">

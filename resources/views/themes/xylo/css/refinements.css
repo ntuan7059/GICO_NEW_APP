@@ -6,6 +6,10 @@ body.storefront-theme {
     text-rendering: optimizeLegibility;
 }
 
+.language-links { display: inline-flex; gap: 5px; align-items: center; }
+.language-links a { opacity: .62; font-weight: 700; }
+.language-links a.active, .language-links a:hover { opacity: 1; color: var(--copper-light); }
+
 .storefront-theme h1,
 .storefront-theme h2,
 .storefront-theme h3,

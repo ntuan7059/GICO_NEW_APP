@@ -1,5 +1,6 @@
 @extends('themes.xylo.layouts.master')
-@section('title', 'Liên hệ | Công ty Cổ phần Gia Hưng')
+@section('title', app()->getLocale() === 'en' ? 'Contact Gia Hung JSC | Copper Wire Sales Vietnam' : 'Liên hệ Gia Hưng | Tư vấn & báo giá dây đồng')
+@section('meta_description', app()->getLocale() === 'en' ? 'Contact Gia Hung in Hanoi for copper wire specifications, technical documents and quotations. Call +84 906 236 863 or email gicovn186@gmail.com.' : 'Liên hệ Gia Hưng tại Hà Nội để được tư vấn quy cách, tài liệu kỹ thuật và báo giá dây đồng. Hotline 0906 23 6863.')
 @section('content')
 <section class="page-hero contact-page-hero"><div class="container"><span class="eyebrow">Kết nối với Gia Hưng</span><h1>Trao đổi nhu cầu.<br>Nhận giải pháp phù hợp.</h1><p>Gửi quy cách, khối lượng hoặc bản vẽ. Chuyên viên của chúng tôi sẽ hỗ trợ trong giờ làm việc.</p></div></section>
 <section class="contact-section-new"><div class="container contact-layout">
