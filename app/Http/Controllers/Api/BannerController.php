@@ -25,7 +25,7 @@ class BannerController extends Controller
                     'type' => $banner->type,
                     'title' => $translation->title ?? $banner->title,
                     'description' => $translation->description ?? null,
-                    'image_url' => $translation->image_url ?? null,
+                    'image_url' => $translation->resolved_image_url ?? null,
                 ];
             });
 

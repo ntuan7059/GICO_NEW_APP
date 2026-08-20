@@ -8,7 +8,6 @@ use App\Models\BannerTranslation;
 use App\Models\Language;
 use App\Services\Admin\BannerService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class BannerController extends Controller
@@ -47,7 +46,11 @@ class BannerController extends Controller
                     ?? $banner->translations->firstWhere('language_code', 'en')
                     ?? $banner->translations->first())->image_url;
 
-                return $imageUrl ? '<img src="'.Storage::url($imageUrl).'" width="50" />' : 'No Image';
+                $translation = $banner->translations->firstWhere('image_url', $imageUrl);
+
+                return $translation?->resolved_image_url
+                    ? '<img src="'.$translation->resolved_image_url.'" width="90" alt="Banner preview" />'
+                    : 'No Image';
             })
             ->addColumn('action', function ($banner) {
                 return '<a href="'.route('admin.banners.edit', $banner->id).'" class="btn btn-primary">Edit</a>

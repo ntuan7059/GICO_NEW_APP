@@ -17,9 +17,7 @@
                 if (! $translation || ! $translation->image_url) {
                     return null;
                 }
-                $image = \Illuminate\Support\Str::startsWith($translation->image_url, ['http://', 'https://'])
-                    ? $translation->image_url
-                    : \Illuminate\Support\Facades\Storage::disk('public')->url($translation->image_url);
+                $image = $translation->resolved_image_url;
                 $link = \Illuminate\Support\Str::startsWith((string) $banner->link_url, ['/', 'http://', 'https://']) ? $banner->link_url : null;
 
                 return ['image' => $image, 'title' => $translation->title, 'description' => strip_tags($translation->description ?? ''), 'link' => $link];
